@@ -1,0 +1,29 @@
+#Sempre importar por fora o cv2_imshow pq ta bugado
+#Sempre importar a biblioteca cv2
+import cv2
+from google.colab.patches import cv2_imshow
+detector_facial = cv2.CascadeClassifier('/content/drive/MyDrive/Visão Computacional Guia Completo/Cascades/haarcascade_frontalface_default.xml')
+detector_olhos = cv2.CascadeClassifier('/content/drive/MyDrive/Visão Computacional Guia Completo/Cascades/haarcascade_eye.xml')
+
+
+#Lembrando que minha pasta está localizada em content>drive>MyDrive
+imagem = cv2.imread('/content/drive/MyDrive/Visão Computacional Guia Completo/Images/people1.jpg')
+
+#Usando a variável imagem usamos o comando cv2.imread para selecionar a imagem a ser examinada.
+#imagem = cv2.resize(imagem, (800, 600))
+
+#Redimensionamos a imagem para facilitar a leitura, caso haja necessidade
+imagem_cinza = cv2.cvtColor (imagem, cv2.COLOR_BGR2GRAY)
+
+#Transformamos em cinza para facilitar também
+
+deteccoes = detector_facial.detectMultiScale(imagem_cinza, scaleFactor = 1.09, minSize= (30, 30))
+
+for(x, y, w, h) in deteccoes:
+    cv2.rectangle(imagem, (x, y), (x + w, y + h),(0, 255, 0), 2)
+    #printar os paramentros w,h para saber o max size/min size coreto
+deteccoes_olhos = detector_olhos.detectMultiScale(imagem_cinza, scaleFactor= 1.09, minNeighbors=10, maxSize=(70,70))
+for(x, y, w, h) in deteccoes_olhos:
+  cv2.rectangle(imagem, (x, y), (x + w, y + h),(0, 0, 255), 2)
+  
+  cv2_imshow(imagem)
