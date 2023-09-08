@@ -1,5 +1,5 @@
 # Visao_computacional
- Esse é um projeto que usa IA para detectar rostos, olhos, carros etc.
+#Esse é um projeto que usa IA para detectar rostos, olhos, carros etc.
 #Esse código visa detectar faces e olhos ao mesmo tempo, 
 
 import cv2
